@@ -96,21 +96,21 @@ public class bikePart {
 	 * 
 	 * @param onSale The onSale to be set.
 	 */
-	public void setonSale(boolean onSale) {
+	public void setOnSale(boolean onSale) {
 		this.onSale = onSale;
 	}	
 	/**Getter method for the quantity field
 	 * 
 	 * @return quantity of the part.
 	 */
-	public int getquantity() {
+	public int getQuantity() {
 		return quantity;
 	}
 	/**Setter method for the quantity field.
 	 * 
 	 * @param quantity The quantity to be set.
 	 */
-	public void setquantity(int quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	
