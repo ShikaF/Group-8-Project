@@ -43,6 +43,7 @@ public class inventorySystem {
 				}
 			}
 			fileReader.close();
+			System.out.println("Successfully read file.");
 		}
 		catch(IOException e){
 			System.out.println("e.getMessage()");
