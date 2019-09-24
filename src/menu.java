@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class menu {
@@ -17,10 +18,18 @@ public class menu {
 			System.out.println("[7] Quit");
 			System.out.print("Enter number of the option you want: ");
 		
-			int input = conIn.nextInt();
+			int input = 0;
+			try {
+				input = conIn.nextInt();
+			}
+			catch (InputMismatchException e) {
+				System.out.println("Invalid Input");
+				conIn.nextLine();
+			}
 			
 			if (input == 1) {
 				System.out.print("Enter name of file: ");
+				conIn.nextLine();
 				String fileName = conIn.nextLine();
 				inventory.readFile(fileName);
 			}
@@ -33,7 +42,10 @@ public class menu {
 				//Edit as you need for your method
 			}
 			else if(input == 4) {
-				inventory.sellPart();
+				System.out.print("Enter name of part: ");
+				conIn.nextLine();
+				String partName = conIn.nextLine();
+				inventory.sellPart(partName);
 				//Edit as you need for your method
 			}
 			else if(input == 5) {
