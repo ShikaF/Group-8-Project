@@ -23,7 +23,7 @@ public class inventorySystem {
 				String[] stringArray = inputLine.split(",");
 				boolean found = false;
 				
-				//Searches through the inventory for the part updaring the fields if it is found 
+				//Searches through the inventory for the part updating the fields if it is found 
 				if (!inventoryList.isEmpty()) {
 					for(int i = 0; i < inventoryList.size(); i++) {
 						if(inventoryList.get(i).getName().equals(stringArray[0])) {
