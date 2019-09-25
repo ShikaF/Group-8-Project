@@ -1,3 +1,5 @@
+package src;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,6 +58,7 @@ public class inventorySystem {
 			System.out.println(e.getMessage());
 		}
 	}
+	//Saleman's Part
 	public void enterPart () {
 		
 	}
@@ -77,6 +80,7 @@ public class inventorySystem {
 	public void sortNumber () {
 		
 	}
+	//Saleman's Part2
 	public void sortName () {
 		
 	}
