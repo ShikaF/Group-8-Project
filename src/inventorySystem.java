@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Comparator;
@@ -11,7 +12,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Array;
     
 public class inventorySystem {
-        private ArrayList<bikePart> inventoryList;
+		private ArrayList<bikePart> inventoryList;
 
     	public inventorySystem(String filename) {
     		inventoryList = new ArrayList<bikePart>();
@@ -20,7 +21,7 @@ public class inventorySystem {
     	
     	public List<bikePart> getInventory() {
 		return inventoryList;
-	}
+    	}
 
     	public void readFile (String fileName) {
     		try {
@@ -31,7 +32,7 @@ public class inventorySystem {
     				String[] stringArray = inputLine.split(",");
     				boolean found = false;
     				
-    				//Searches through the inventory for the part updaring the fields if it is found 
+    				//Searches through the inventory for the part updating the fields if it is found 
     				if (!inventoryList.isEmpty()) {
     					for(int i = 0; i < inventoryList.size(); i++) {
     						if(inventoryList.get(i).getName().equals(stringArray[0])) {
@@ -62,7 +63,7 @@ public class inventorySystem {
     			fileReader.close();
     			System.out.println("Successfully read file.");
     		}
-    		catch(IOException e){
+    		catch(FileNotFoundException e){
     			System.out.println(e.getMessage());
     		}
         }
@@ -79,27 +80,27 @@ public class inventorySystem {
     	
     	//Find Inventory Method
         public bikePart findInventory(bikePart bp) {
-		for(bikePart i : inventoryList) {
-			if(i.getNumber() == bp.getNumber()) {
-				return i;
-			}
-		}
+        	for(bikePart i : inventoryList) {
+        		if(i.getNumber() == bp.getNumber()) {
+        			return i;
+        		}
+        	}
 		return null;
 	}
     	
-	//getBp Method
-	public bikePart getBp(int i) {
-	    bikePart bp = inventoryList.get(i);
-	    return bp;
-	}
+        //getBp Method
+        public bikePart getBp(int i) {
+        	bikePart bp = inventoryList.get(i);
+        	return bp;
+        }
 	
-	//Get Size of ArrayList Method
-	public int getSize() {
-	    return inventoryList.size();
-	}
+        //Get Size of ArrayList Method
+        public int getSize() {
+        	return inventoryList.size();
+        }
 	
-	//Update Inventory Method
-	private void updateInventory(bikePart bp) {
+        //Update Inventory Method
+	/*private void updateInventory(bikePart bp) {
 		for(bikePart x : inventoryList) {
 		    if(x.getNumber() == bp.getNumber()) {
 		        x.setPriceList(bp.getPriceList());
@@ -111,7 +112,7 @@ public class inventorySystem {
 	}
 	
 	//Update WarehouseDB Method
-        public void updateWarehouseDB(String fileName) throws FileNotFoundException {
+        /*public void updateWarehouseDB(String fileName) throws FileNotFoundException {
 		File file = new File(fileName);
 		Scanner read = new Scanner(file);
 		while(read.hasNextLine()) {
@@ -128,8 +129,9 @@ public class inventorySystem {
 			addInventory(bp);
 		}
 		read.close();
-        }
+        }*/
 	
+      
 	public void displayPart () {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter the Part Name ");
@@ -160,56 +162,66 @@ public class inventorySystem {
 		}
 		
 	}
-	
-	public void sellPart (String partName) {
-		for(int i = 0; i < inventoryList.size(); i++) {
-			if (inventoryList.get(i).getName().equals(partName)) {
-				double price;
-				if(inventoryList.get(i).getOnSale())price = inventoryList.get(i).getPriceSale();
-				else price = inventoryList.get(i).getPriceList();
-				System.out.println(inventoryList.get(i).getName() + ":" + price + "|Time:" + System.currentTimeMillis() + "|");
-				break;
-			}
-		}
-		
-	}
-	
-	public void sortNumber () {
-		
-	}
 
-	//Comparator for name
-	public static Comparator<bikePart> SORT_BY_NAME = new Comparator<bikePart>() {
-		@Override
-		public int compare( bikePart bp1, bikePart bp2) {
-			String bp1Name = bp1.getName();
-			String bp2Name = bp2.getName();
-			return bp1Name.compareTo(bp2Name);
-		}
-	};   
+        public void sellPart (String partName) {
+        	for(int i = 0; i < inventoryList.size(); i++) {
+            	Calendar rightNow = Calendar.getInstance();
+        		if (inventoryList.get(i).getName().equals(partName)) {
+        			if (inventoryList.get(i).getQuantity() == 0) {
+        				System.out.print("That Item is Out of stock.");
+        				break;
+        			}
+        			double price;
+        			if(inventoryList.get(i).getOnSale())price = inventoryList.get(i).getPriceSale();
+        			else price = inventoryList.get(i).getPriceList();
+        			System.out.println(inventoryList.get(i).getName() + ":" + price +  rightNow.getTime() + "|");
+        			inventoryList.get(i).setQuantity(inventoryList.get(i).getQuantity() - 1);
+        			break;
+        		}
+        	}
+        }
+        //Comparator for number
+        public static Comparator<bikePart> SORT_BY_NUMBER = new Comparator<bikePart>() {
+        	@Override
+        	public int compare( bikePart bp1, bikePart bp2) {
+        		int bp1Number = bp1.getNumber();
+        		int bp2Number = bp2.getNumber();
+        		return bp1Number - bp2Number;
+        	}
+        };
+        
+        //Comparator for name
+        public static Comparator<bikePart> SORT_BY_NAME = new Comparator<bikePart>() {
+        	@Override
+        	public int compare( bikePart bp1, bikePart bp2) {
+        		String bp1Name = bp1.getName();
+        		String bp2Name = bp2.getName();
+        		return bp1Name.compareTo(bp2Name);
+        	}
+        };
 	
-	//SortByName Method
-	public bikePart findPartByName(String name) {
-		for(bikePart bp : inventoryList) {
-			if(bp.getName().equals(name)) {
-				return bp;
-			}
-		}
-		return null;
-	}
+        //SortByName Method
+        public bikePart findPartByName(String name) {
+        	for(bikePart bp : inventoryList) {
+        		if(bp.getName().equals(name)) {
+        			return bp;
+        		}
+        	}
+        	return null;
+        }
 		
-	//save DB method
-	public void saveWarehouseDB (String fileName) {
-		try {
-			PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-			for(bikePart i : inventoryList) {
-				writer.println(i.getName() + "," + i.getNumber() +
-						"," + i.getPriceList() + "," + i.getPriceSale() +
-						"," + i.getOnSale() + "," + i.getQuantity());
-			}
-			writer.close();
-		} catch (IOException e) {
-			System.out.println("file error!");
-		}
-	} 
+        //save DB method
+        public void saveWarehouseDB (String fileName) {
+        	try {
+        		PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+        		for(bikePart i : inventoryList) {
+        			writer.println(i.getName() + "," + i.getNumber() +
+        					"," + i.getPriceList() + "," + i.getPriceSale() +
+        					"," + i.getOnSale() + "," + i.getQuantity());
+        		}
+        		writer.close();
+        	} catch (IOException e) {
+        		System.out.println("file error!");
+        	}
+        } 
 }
