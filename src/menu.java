@@ -63,14 +63,12 @@ public class menu {
 	                         inventory.addInventory(bp);;			}
 			else if(input == 3) {
 				inventory.displayPart();
-				//Edit as you need for your method
 			}
 			else if(input == 4) {
 				System.out.print("Enter name of part: ");
 				conIn.nextLine();
 				String partName = conIn.nextLine();
 				inventory.sellPart(partName);
-				//Edit as you need for your method
 			}
 			else if(input == 5) {
 				//SortByNumber Call

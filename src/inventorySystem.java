@@ -98,39 +98,6 @@ public class inventorySystem {
         public int getSize() {
         	return inventoryList.size();
         }
-	
-        //Update Inventory Method
-	/*private void updateInventory(bikePart bp) {
-		for(bikePart x : inventoryList) {
-		    if(x.getNumber() == bp.getNumber()) {
-		        x.setPriceList(bp.getPriceList());
-		        x.setPriceSale(bp.getPriceSale());
-		        x.setOnSale(bp.getOnSale());
-		        x.setQuantity(bp.getQuantity());
-		    }
-		}
-	}
-	
-	//Update WarehouseDB Method
-        /*public void updateWarehouseDB(String fileName) throws FileNotFoundException {
-		File file = new File(fileName);
-		Scanner read = new Scanner(file);
-		while(read.hasNextLine()) {
-			String line = read.nextLine();
-			String regExp = "\\s*(\\s|,)\\s*";
-			String bpi[] = line.split(regExp);
-			String name = bpi[0];
-			int number = Integer.parseInt(bpi[1]);
-			double priceList = Double.parseDouble(bpi[2]);
-			double priceSale = Double.parseDouble(bpi[3]);
-			boolean onSale = Boolean.parseBoolean(bpi[4]);
-			int quantity = Integer.parseInt(bpi[5]);
-			bikePart bp = new bikePart(name, number, priceList, priceSale, onSale, quantity);
-			addInventory(bp);
-		}
-		read.close();
-        }*/
-	
       
 	public void displayPart () {
 		Scanner scan = new Scanner(System.in);
@@ -146,9 +113,11 @@ public class inventorySystem {
 			scan.nextLine();
 		}	
 		
+		boolean found = false;
 		for(int i = 0; i < inventoryList.size(); i ++){
 			
 			if (userInput.equals(inventoryList.get(i).getName())) {	//Prints the Part Information successfully if found
+				found = true;
 				System.out.println("Name: "+inventoryList.get(i).getName());
 				System.out.println("Part Number: "+inventoryList.get(i).getNumber());
 				System.out.println("List Price: "+inventoryList.get(i).getPriceList());
@@ -156,11 +125,10 @@ public class inventorySystem {
 				System.out.println("On Sale: "+inventoryList.get(i).getOnSale());
 				System.out.println("Quantity: "+inventoryList.get(i).getQuantity());
 				System.out.println();
+				scan.nextLine();
 			}
-			else
-				System.out.println("No part with the name, "+userInput+" was found");
 		}
-		
+		if(!found)System.out.println("No part with the name, "+userInput+" was found");
 	}
 
         public void sellPart (String partName) {
