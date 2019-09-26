@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Comparator;
@@ -134,6 +135,7 @@ public class inventorySystem {
 	
         public void sellPart (String partName) {
         	for(int i = 0; i < inventoryList.size(); i++) {
+            	Calendar rightNow = Calendar.getInstance();
         		if (inventoryList.get(i).getName().equals(partName)) {
         			if (inventoryList.get(i).getQuantity() == 0) {
         				System.out.print("That Item is Out of stock.");
@@ -142,7 +144,7 @@ public class inventorySystem {
         			double price;
         			if(inventoryList.get(i).getOnSale())price = inventoryList.get(i).getPriceSale();
         			else price = inventoryList.get(i).getPriceList();
-        			System.out.println(inventoryList.get(i).getName() + ":" + price + "|Time:" + System.currentTimeMillis() + "|");
+        			System.out.println(inventoryList.get(i).getName() + ":" + price +  rightNow.getTime() + "|");
         			inventoryList.get(i).setQuantity(inventoryList.get(i).getQuantity() - 1);
         			break;
         		}
