@@ -89,15 +89,6 @@ public class menu {
 			        on = false;
 				
 				inventory.saveWarehouseDB(filename);
-				
-				/**
-				try {
-				inventory.saveWarehouseDB(updateFile);
-    				//File was Successfully Updated!
-                                } catch(FileNotFoundException e) {
-                                    System.out.println("File was not found");
-                                }
-                                **/
     			}
               }
               conIn.close();
