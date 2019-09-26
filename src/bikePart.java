@@ -2,7 +2,6 @@ package src;
 
 
 public class bikePart {
-
 	private String name;
 	private int number;
 	private double priceList;
@@ -34,6 +33,7 @@ public class bikePart {
 	public String getName() {
 		return name;
 	}
+	
 	/**Setter method for the name field.
 	 * 
 	 * @param name The name to be set.
@@ -49,6 +49,7 @@ public class bikePart {
 	public int getNumber() {
 		return number;
 	}
+	
 	/**Setter method for the number field.
 	 * 
 	 * @param number The number to be set.
@@ -64,6 +65,7 @@ public class bikePart {
 	public double getPriceList() {
 		return priceList;
 	}
+	
 	/**Setter method for the priceList field.
 	 * 
 	 * @param prcelist The priceList to be set.
@@ -79,6 +81,7 @@ public class bikePart {
 	public double getPriceSale() {
 		return priceSale;
 	}
+	
 	/**Setter method for the priceSale field.
 	 * 
 	 * @param priceSale The priceSale to be set.
@@ -101,6 +104,7 @@ public class bikePart {
 	public void setOnSale(boolean onSale) {
 		this.onSale = onSale;
 	}	
+	
 	/**Getter method for the quantity field
 	 * 
 	 * @return quantity of the part.
@@ -108,6 +112,7 @@ public class bikePart {
 	public int getQuantity() {
 		return quantity;
 	}
+	
 	/**Setter method for the quantity field.
 	 * 
 	 * @param quantity The quantity to be set.
