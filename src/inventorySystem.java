@@ -60,7 +60,7 @@ public class inventorySystem {
     			fileReader.close();
     			System.out.println("Successfully read file.");
     		}
-    		catch(IOException e){
+    		catch(FileNotFoundException e){
     			System.out.println(e.getMessage());
     		}
         }
@@ -97,7 +97,7 @@ public class inventorySystem {
 	}
 	
 	//Update Inventory Method
-	private void updateInventory(bikePart bp) {
+	/*private void updateInventory(bikePart bp) {
 		for(bikePart x : inventoryList) {
 		    if(x.getNumber() == bp.getNumber()) {
 		        x.setPriceList(bp.getPriceList());
@@ -109,7 +109,7 @@ public class inventorySystem {
 	}
 	
 	//Update WarehouseDB Method
-        public void updateWarehouseDB(String fileName) throws FileNotFoundException {
+        /*public void updateWarehouseDB(String fileName) throws FileNotFoundException {
 		File file = new File(fileName);
 		Scanner read = new Scanner(file);
 		while(read.hasNextLine()) {
@@ -126,7 +126,7 @@ public class inventorySystem {
 			addInventory(bp);
 		}
 		read.close();
-        }
+        }*/
 	
 	public void displayPart () {
 		
@@ -135,10 +135,15 @@ public class inventorySystem {
 	public void sellPart (String partName) {
 		for(int i = 0; i < inventoryList.size(); i++) {
 			if (inventoryList.get(i).getName().equals(partName)) {
+				if (inventoryList.get(i).getQuantity() == 0) {
+					System.out.print("That Item is Out of stock.");
+					break;
+				}
 				double price;
 				if(inventoryList.get(i).getOnSale())price = inventoryList.get(i).getPriceSale();
 				else price = inventoryList.get(i).getPriceList();
 				System.out.println(inventoryList.get(i).getName() + ":" + price + "|Time:" + System.currentTimeMillis() + "|");
+				inventoryList.get(i).setQuantity(inventoryList.get(i).getQuantity() - 1);
 				break;
 			}
 		}
@@ -157,7 +162,7 @@ public class inventorySystem {
 			String bp2Name = bp2.getName();
 			return bp1Name.compareTo(bp2Name);
 		}
-	};   
+	};
 	
 	//SortByName Method
 	public bikePart findPartByName(String name) {
