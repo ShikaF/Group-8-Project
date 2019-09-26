@@ -1,4 +1,4 @@
-package src;
+//package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
 import java.util.Comparator;
+import java.util.InputMismatchException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
     
 public class inventorySystem {
         private ArrayList<bikePart> inventoryList;
@@ -129,6 +131,33 @@ public class inventorySystem {
         }
 	
 	public void displayPart () {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter the Part Name ");
+		
+		String userInput = "";
+		
+		try {
+			userInput = scan.nextLine();
+		}
+		catch (InputMismatchException e) {
+			System.out.println("Invalid Input");
+			scan.nextLine();
+		}	
+		
+		for(int i = 0; i < inventoryList.size(); i ++){
+			
+			if (userInput.equals(inventoryList.get(i).getName())) {	//Prints the Part Information successfully if found
+				System.out.println("Name: "+inventoryList.get(i).getName());
+				System.out.println("Part Number: "+inventoryList.get(i).getNumber());
+				System.out.println("List Price: "+inventoryList.get(i).getPriceList());
+				System.out.println("Sale Price: "+inventoryList.get(i).getPriceSale());
+				System.out.println("On Sale: "+inventoryList.get(i).getOnSale());
+				System.out.println("Quantity: "+inventoryList.get(i).getQuantity());
+				System.out.println();
+			}
+			else
+				System.out.println("No part with the name, "+userInput+" was found");
+		}
 		
 	}
 	
