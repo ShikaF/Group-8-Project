@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 testcase,123,10.0,5.0,true,2
 EXAMPLE,923,50.0,30.0,false,3
 WTB_saddle,1234567890,33.0,25.58,false,25
@@ -11,3 +12,5 @@ carbonHandleBars42cm,1234567893,47.0,5.58,true,25
 11spRearDerailuer,1234567898,60.0,50.5,true,10
 11spFrontDerailuer,1234567899,60.0,50.5,true,10
 mensBibsMedium,1234567900,110.0,99.0,false,4
+=======
+>>>>>>> c4374a4557ab0aad1fa4747600ba9df16559dfe3
