@@ -153,6 +153,16 @@ public class inventorySystem {
 		
         }
 
+        //Comparator for number
+        public static Comparator<bikePart> SORT_BY_NUMBER = new Comparator<bikePart>() {
+        	@Override
+        	public int compare( bikePart bp1, bikePart bp2) {
+        		int bp1Number = bp1.getNumber();
+        		int bp2Number = bp2.getNumber();
+        		return bp1Number - bp2Number;
+        	}
+        };
+        
         //Comparator for name
         public static Comparator<bikePart> SORT_BY_NAME = new Comparator<bikePart>() {
         	@Override

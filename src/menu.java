@@ -73,8 +73,14 @@ public class menu {
 				//Edit as you need for your method
 			}
 			else if(input == 5) {
-				inventory.sortNumber();
-				//Edit as you need for your method
+				//SortByNumber Call
+				Collections.sort(inventory.getInventory(), inventorySystem.SORT_BY_NUMBER);
+				for(int i = 0; i < inventory.getSize(); i++) {
+				    bikePart bp = inventory.getBp(i);
+				    System.out.println(bp);
+				};
+			conIn.nextLine();;
+    			conIn.nextLine();	
 			}
 			else if(input == 6) {
 			        //SortByName Call
